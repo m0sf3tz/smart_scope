@@ -1,4 +1,12 @@
+Repository must be placed in: /opt/nvidia/deepstream/deepstream-6.0/sources/apps
 
+This is because the NVIDIA inference model makes references with paths hardcoded (offending file is labels.txt)
 
-https://github.com/m0sf3tz/scope-jetson/assets/16571423/36a3fa5e-a68b-4808-bb00-343ac9bb3879
+To compile everything, run:
+$ make
 
+To clean everything, including videos:
+$ make clean
+
+to run, issue the following:
+$ ./runner.sh
