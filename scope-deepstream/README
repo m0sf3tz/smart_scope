@@ -1,0 +1,8 @@
+To run enter the command
+
+$ ./smartscope -[zfst]
+
+-z = zooms in, reduces fps to 30
+-f = forces always drawing bounding box
+-s = displays output onto monitor. If no monitor is connected and the program is staretd it will fail
+-t = overlays ms since program started onto screen. This infromation is also stored in the radar dump

@@ -1,0 +1,70 @@
+/*
+ * Copyright (c) 2021 Nordic Semiconductor ASA
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/ {
+	chosen {
+		zephyr,console = &cdc_acm_uart0;
+	};
+
+  buttons {
+    rotary_click_0: rotary_click0 {
+      gpios = <&gpio1 8 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+      label = "rotary click button";
+    };
+    rotary_a: rotarya {
+      gpios = <&gpio1 9 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+      label = "rotary A encoder";
+    };
+    rotary_b: rotaryb {
+      gpios = <&gpio0 8 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+      label = "rotary B encoder";
+    };
+
+    int_0: int0 {
+      gpios = <&gpio0 28 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+      label = "IMU interrupt line";
+    };
+
+    button_0: button0 {
+      gpios = <&gpio0 5 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+      label = "front button 0";
+    };
+    button_1: button1 {
+      gpios = <&gpio0 30 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+      label = "front button 1";
+    };
+  };
+};
+
+&zephyr_udc0 {
+	cdc_acm_uart0: cdc_acm_uart0 {
+		compatible = "zephyr,cdc-acm-uart";
+	};
+
+ 	uart_spew: cdc_acm_uart1 {
+		compatible = "zephyr,cdc-acm-uart";
+	};
+};
+
+&feather_serial {
+  status = "disabled";
+};
+
+&feather_i2c {
+  imu_0: imu@6b {
+    status = "ok";
+    compatible = "st,lsm6dsv16x";
+
+    reg = <0x6B>;
+    irq-gpios = <&gpio0 28 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
+
+    #gyro-odr  = <0x2>;
+    #accel-odr = <0x2>;
+ 
+    gyro-odr  = <0x9>; 
+    accel-odr = <0x9>;
+  };
+};
